@@ -12,19 +12,25 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'npm ci'
+                dir('frontend') {
+                    bat 'npm ci'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                bat 'node test.js'
+                dir('frontend') {
+                    bat 'node test.js'
+                }
             }
         }
 
         stage('Build') {
             steps {
-                bat 'npm run build'
+                dir('frontend') {
+                    bat 'npm run build'
+                }
             }
         }
     }
@@ -34,14 +40,14 @@ pipeline {
         success {
             echo 'BUILD SUCCESSFUL'
 
-            archiveArtifacts artifacts: 'feedback.txt',
+            archiveArtifacts artifacts: 'frontend/feedback.txt',
                              allowEmptyArchive: false
         }
 
         failure {
             echo 'BUILD FAILED'
 
-            archiveArtifacts artifacts: 'feedback.txt',
+            archiveArtifacts artifacts: 'frontend/feedback.txt',
                              allowEmptyArchive: true
         }
     }
