@@ -1,4 +1,5 @@
 pipeline {
+
     agent any
 
     stages {
@@ -29,19 +30,17 @@ pipeline {
     }
 
     post {
+
         success {
             echo 'BUILD SUCCESSFUL'
 
-            archiveArtifacts artifacts: 'feedback.txt',
-                             fingerprint: true
+            archiveArtifacts artifacts: 'feedback.txt,dist/**', allowEmptyArchive: false
         }
 
         failure {
             echo 'BUILD FAILED'
 
-            archiveArtifacts artifacts: 'feedback.txt',
-                             allowEmptyArchive: true,
-                             fingerprint: true
+            archiveArtifacts artifacts: 'feedback.txt', allowEmptyArchive: true
         }
     }
 }
