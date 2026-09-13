@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from "node:fs";
 
 let passed = 0;
 let failed = 0;
@@ -11,7 +11,7 @@ function test(name, condition) {
     passed++;
 
     results.push({
-      name: name,
+      name,
       status: "PASS",
     });
   } else {
@@ -19,15 +19,15 @@ function test(name, condition) {
     failed++;
 
     results.push({
-      name: name,
+      name,
       status: "FAIL",
     });
   }
 }
 
-console.log("\n================================");
-console.log("   ASSIGNMENT PORTAL TESTS");
-console.log("================================\n");
+console.log("\n========================================");
+console.log("       ASSIGNMENT PORTAL TESTS");
+console.log("========================================\n");
 
 
 /* =====================================================
@@ -51,7 +51,7 @@ test(
 
 
 /* =====================================================
-   DASHBOARD.JSX TESTS
+   DASHBOARD TESTS
    ===================================================== */
 
 let dashboardCode = "";
@@ -69,6 +69,11 @@ if (fs.existsSync("src/pages/Dashboard.jsx")) {
   );
 
   test(
+    "Dashboard component is exported",
+    dashboardCode.includes("export default Dashboard")
+  );
+
+  test(
     "Welcome section exists",
     dashboardCode.includes("WELCOME BACK")
   );
@@ -76,6 +81,18 @@ if (fs.existsSync("src/pages/Dashboard.jsx")) {
   test(
     "Student Dashboard heading exists",
     dashboardCode.includes("Student Dashboard")
+  );
+
+  test(
+    "Welcome description exists",
+    dashboardCode.includes(
+      "Manage your assignments, track deadlines"
+    )
+  );
+
+  test(
+    "Upload Assignment button exists",
+    dashboardCode.includes("Upload Assignment")
   );
 
   test(
@@ -104,19 +121,34 @@ if (fs.existsSync("src/pages/Dashboard.jsx")) {
   );
 
   test(
-    "Upload Assignment button exists",
-    dashboardCode.includes("Upload Assignment")
+    "View All link exists",
+    dashboardCode.includes("View All")
   );
 
   test(
     "Assignment list exists",
     dashboardCode.includes("assignments.map")
   );
+
+  test(
+    "Due Date information exists",
+    dashboardCode.includes("DUE DATE")
+  );
+
+  test(
+    "Assignment status exists",
+    dashboardCode.includes("assignment.status")
+  );
+
+  test(
+    "View button exists",
+    dashboardCode.includes("View")
+  );
 }
 
 
 /* =====================================================
-   APP.JSX ROUTE TEST
+   APP ROUTING TESTS
    ===================================================== */
 
 let appCode = "";
@@ -130,7 +162,9 @@ if (fs.existsSync("src/App.jsx")) {
 
   test(
     "Dashboard is imported in App.jsx",
-    appCode.includes('import Dashboard from "./pages/Dashboard.jsx"')
+    appCode.includes(
+      'import Dashboard from "./pages/Dashboard.jsx"'
+    )
   );
 
   test(
@@ -142,11 +176,26 @@ if (fs.existsSync("src/App.jsx")) {
     "Dashboard component is used in route",
     appCode.includes("<Dashboard />")
   );
+
+  test(
+    "Login route exists",
+    appCode.includes('path="/login"')
+  );
+
+  test(
+    "Register route exists",
+    appCode.includes('path="/register"')
+  );
+
+  test(
+    "Splash Screen route exists",
+    appCode.includes('path="/"')
+  );
 }
 
 
 /* =====================================================
-   APP.CSS TESTS
+   DASHBOARD CSS TESTS
    ===================================================== */
 
 let cssCode = "";
@@ -164,8 +213,23 @@ if (fs.existsSync("src/App.css")) {
   );
 
   test(
-    "Navbar CSS exists",
+    "Dashboard navbar CSS exists",
     cssCode.includes(".dashboard-navbar")
+  );
+
+  test(
+    "Dashboard navigation CSS exists",
+    cssCode.includes(".dashboard-nav-links")
+  );
+
+  test(
+    "Welcome section CSS exists",
+    cssCode.includes(".welcome-section")
+  );
+
+  test(
+    "Upload button CSS exists",
+    cssCode.includes(".upload-btn")
   );
 
   test(
@@ -174,7 +238,7 @@ if (fs.existsSync("src/App.css")) {
   );
 
   test(
-    "Stat card CSS exists",
+    "Statistics card CSS exists",
     cssCode.includes(".stat-card")
   );
 
@@ -184,7 +248,22 @@ if (fs.existsSync("src/App.css")) {
   );
 
   test(
-    "Responsive Dashboard CSS exists",
+    "Assignment card CSS exists",
+    cssCode.includes(".assignment-card")
+  );
+
+  test(
+    "Assignment status CSS exists",
+    cssCode.includes(".assignment-status")
+  );
+
+  test(
+    "View button CSS exists",
+    cssCode.includes(".view-btn")
+  );
+
+  test(
+    "Responsive CSS exists",
     cssCode.includes("@media")
   );
 
@@ -206,7 +285,7 @@ if (fs.existsSync("src/App.css")) {
 
 
 /* =====================================================
-   GENERATE FEEDBACK REPORT
+   GENERATE TEST REPORT
    ===================================================== */
 
 const total = passed + failed;
@@ -219,7 +298,7 @@ const status = failed === 0
 let report = "";
 
 report += "========================================\n";
-report += "       ASSIGNMENT PORTAL REPORT\n";
+report += "       ASSIGNMENT PORTAL TEST REPORT\n";
 report += "========================================\n\n";
 
 report += `Total Tests : ${total}\n`;
@@ -230,9 +309,7 @@ report += `Status      : ${status}\n\n`;
 report += "--------------- TEST RESULTS ---------------\n\n";
 
 results.forEach((result, index) => {
-
   report += `${index + 1}. ${result.status} - ${result.name}\n`;
-
 });
 
 report += "\n========================================\n";
@@ -247,9 +324,9 @@ fs.writeFileSync(
    CONSOLE SUMMARY
    ===================================================== */
 
-console.log("\n================================");
-console.log("         TEST SUMMARY");
-console.log("================================");
+console.log("\n========================================");
+console.log("              TEST SUMMARY");
+console.log("========================================");
 
 console.log(`Total Tests : ${total}`);
 console.log(`Passed      : ${passed}`);
@@ -257,11 +334,11 @@ console.log(`Failed      : ${failed}`);
 console.log(`Status      : ${status}`);
 
 console.log("\nFeedback report generated:");
-console.log("feedback.txt\n");
+console.log("feedback.txt");
 
 
 /* =====================================================
-   JENKINS RESULT
+   JENKINS BUILD RESULT
    ===================================================== */
 
 if (failed > 0) {
