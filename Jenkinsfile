@@ -1,4 +1,5 @@
 pipeline {
+
     agent any
 
     stages {
@@ -9,29 +10,47 @@ pipeline {
             }
         }
 
-        stage('Run Test') {
+        stage('Install Dependencies') {
             steps {
-                dir('backend') {
+                dir('frontend') {
+                    bat 'npm ci'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir('frontend') {
                     bat 'node test.js'
                 }
             }
         }
 
+        stage('Build') {
+            steps {
+                dir('frontend') {
+                    bat 'npm run build'
+                }
+            }
+        }
     }
 
     post {
 
         always {
-            archiveArtifacts artifacts: 'backend/feedback-report.txt'
+            archiveArtifacts artifacts: 'backend/feedback-report.txt',
+                             allowEmptyArchive: true
+
+            archiveArtifacts artifacts: 'frontend/feedback.txt',
+                             allowEmptyArchive: true
         }
 
         success {
-            echo 'Build Successful'
+            echo 'BUILD SUCCESSFUL'
         }
 
         failure {
-            echo 'Build Failed'
+            echo 'BUILD FAILED'
         }
-
     }
 }
