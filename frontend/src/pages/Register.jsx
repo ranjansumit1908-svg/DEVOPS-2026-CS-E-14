@@ -9,11 +9,11 @@ function Register() {
     username: "",
     password: "",
     confirmPassword: "",
-    role: "student",
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -30,51 +30,28 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
+    if (
+      formData.password !==
+      formData.confirmPassword
+    ) {
       setError("Passwords do not match.");
       return;
     }
 
-    if (formData.password.length < 6) {
-      setError("Password must contain at least 6 characters.");
-      return;
-    }
+    /*
+      Backend registration will be connected here later.
+    */
 
-    const users =
-      JSON.parse(localStorage.getItem("users")) || [];
+    console.log("Registration Data:", formData);
 
-    const usernameExists = users.some(
-      (user) => user.username === formData.username
-    );
-
-    if (usernameExists) {
-      setError(
-        "Username already exists. Please choose another username."
-      );
-      return;
-    }
-
-    const newUser = {
-      name: formData.name,
-      username: formData.username,
-      password: formData.password,
-      role: formData.role,
-    };
-
-    users.push(newUser);
-
-    localStorage.setItem(
-      "users",
-      JSON.stringify(users)
-    );
-
-    alert("Account created successfully!");
-
+    // Temporary navigation
     navigate("/login");
   };
 
   return (
     <div className="auth-page">
+
+      {/* ================= HEADER ================= */}
 
       <header className="auth-header">
 
@@ -90,6 +67,7 @@ function Register() {
           </div>
 
         </Link>
+
 
         <div className="auth-header-right">
 
@@ -108,7 +86,11 @@ function Register() {
       </header>
 
 
+      {/* ================= MAIN ================= */}
+
       <main className="auth-main register-main">
+
+        {/* ================= LEFT ================= */}
 
         <section className="auth-intro">
 
@@ -126,19 +108,27 @@ function Register() {
 
           </div>
 
+
           <h1>
+
             Start
             <br />
+
             <span>
               organized.
             </span>
+
           </h1>
 
+
           <p className="auth-description">
+
             Create your account and bring all your
             assignments, deadlines, and academic work
             into one focused workspace.
+
           </p>
+
 
           <div className="auth-quote">
 
@@ -152,6 +142,8 @@ function Register() {
 
         </section>
 
+
+        {/* ================= REGISTER PANEL ================= */}
 
         <section className="login-panel register-panel">
 
@@ -169,6 +161,7 @@ function Register() {
 
             </div>
 
+
             <div className="panel-number">
               02
             </div>
@@ -179,9 +172,11 @@ function Register() {
           <div className="panel-divider"></div>
 
 
+          {/* ================= FORM ================= */}
+
           <form onSubmit={handleSubmit}>
 
-            {/* FULL NAME */}
+            {/* NAME */}
 
             <div className="input-group">
 
@@ -257,7 +252,9 @@ function Register() {
                     setShowPassword(!showPassword)
                   }
                 >
-                  {showPassword ? "HIDE" : "SHOW"}
+                  {showPassword
+                    ? "HIDE"
+                    : "SHOW"}
                 </button>
 
               </div>
@@ -299,60 +296,10 @@ function Register() {
                     )
                   }
                 >
-                  {showConfirmPassword ? "HIDE" : "SHOW"}
+                  {showConfirmPassword
+                    ? "HIDE"
+                    : "SHOW"}
                 </button>
-
-              </div>
-
-            </div>
-
-
-            {/* ROLE */}
-
-            <div className="input-group">
-
-              <label>
-                REGISTER AS
-              </label>
-
-              <div className="role-selector">
-
-                <label className="role-option">
-
-                  <input
-                    type="radio"
-                    name="role"
-                    value="student"
-                    checked={
-                      formData.role === "student"
-                    }
-                    onChange={handleChange}
-                  />
-
-                  <span>
-                    🎓 Student
-                  </span>
-
-                </label>
-
-
-                <label className="role-option">
-
-                  <input
-                    type="radio"
-                    name="role"
-                    value="teacher"
-                    checked={
-                      formData.role === "teacher"
-                    }
-                    onChange={handleChange}
-                  />
-
-                  <span>
-                    👨‍🏫 Teacher
-                  </span>
-
-                </label>
 
               </div>
 
@@ -388,6 +335,8 @@ function Register() {
           </form>
 
 
+          {/* LOGIN LINK */}
+
           <div className="register-prompt">
 
             <span>
@@ -400,6 +349,8 @@ function Register() {
 
           </div>
 
+
+          {/* SECURITY */}
 
           <div className="security-note">
 
@@ -418,32 +369,59 @@ function Register() {
       </main>
 
 
+      {/* ================= RUNNING FOOTER ================= */}
+
       <footer className="auth-marquee-footer">
 
         <div className="auth-marquee-track">
 
-          <span>ASSIGNMENT PORTAL</span>
+          <span>
+            ASSIGNMENT PORTAL
+          </span>
+
           <b>•</b>
 
-          <span>ORGANIZE YOUR WORK</span>
+          <span>
+            ORGANIZE YOUR WORK
+          </span>
+
           <b>•</b>
 
-          <span>TRACK DEADLINES</span>
+          <span>
+            TRACK DEADLINES
+          </span>
+
           <b>•</b>
 
-          <span>SUBMIT WITH CONFIDENCE</span>
+          <span>
+            SUBMIT WITH CONFIDENCE
+          </span>
+
           <b>•</b>
 
-          <span>ASSIGNMENT PORTAL</span>
+
+          <span>
+            ASSIGNMENT PORTAL
+          </span>
+
           <b>•</b>
 
-          <span>ORGANIZE YOUR WORK</span>
+          <span>
+            ORGANIZE YOUR WORK
+          </span>
+
           <b>•</b>
 
-          <span>TRACK DEADLINES</span>
+          <span>
+            TRACK DEADLINES
+          </span>
+
           <b>•</b>
 
-          <span>SUBMIT WITH CONFIDENCE</span>
+          <span>
+            SUBMIT WITH CONFIDENCE
+          </span>
+
           <b>•</b>
 
         </div>
