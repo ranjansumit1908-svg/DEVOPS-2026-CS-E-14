@@ -7,9 +7,11 @@ function Login() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
+    role: "student",
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,20 +20,40 @@ function Login() {
       ...formData,
       [name]: value,
     });
+
+    setError("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    /*
-      Backend authentication will be connected here later.
+    const users =
+      JSON.parse(localStorage.getItem("users")) || [];
 
-      For now, this simply demonstrates the login flow.
-    */
+    const user = users.find(
+      (item) =>
+        item.username === formData.username &&
+        item.password === formData.password &&
+        item.role === formData.role
+    );
 
-    console.log("Login Data:", formData);
+    if (!user) {
+      setError(
+        "Invalid username, password, or selected role."
+      );
+      return;
+    }
 
-    // Temporary navigation
+    localStorage.setItem(
+      "currentUser",
+      JSON.stringify(user)
+    );
+
+    localStorage.setItem(
+      "userRole",
+      user.role
+    );
+
     navigate("/dashboard");
   };
 
@@ -55,14 +77,17 @@ function Login() {
 
         </Link>
 
-
         <div className="auth-header-right">
 
-          <span>ACADEMIC WORKSPACE</span>
+          <span>
+            ACADEMIC WORKSPACE
+          </span>
 
           <i></i>
 
-          <strong>2026</strong>
+          <strong>
+            2026
+          </strong>
 
         </div>
 
@@ -79,11 +104,15 @@ function Login() {
 
           <div className="auth-eyebrow">
 
-            <span>WELCOME BACK</span>
+            <span>
+              WELCOME BACK
+            </span>
 
             <div></div>
 
-            <small>02 / 02</small>
+            <small>
+              02 / 02
+            </small>
 
           </div>
 
@@ -91,8 +120,9 @@ function Login() {
           <h1>
             Your work.
             <br />
-
-            <span>Still here.</span>
+            <span>
+              Still here.
+            </span>
           </h1>
 
 
@@ -134,7 +164,6 @@ function Login() {
 
             </div>
 
-
             <div className="panel-number">
               01
             </div>
@@ -145,7 +174,7 @@ function Login() {
           <div className="panel-divider"></div>
 
 
-          {/* FORM */}
+          {/* ================= FORM ================= */}
 
           <form onSubmit={handleSubmit}>
 
@@ -202,11 +231,6 @@ function Login() {
                   onClick={() =>
                     setShowPassword(!showPassword)
                   }
-                  aria-label={
-                    showPassword
-                      ? "Hide password"
-                      : "Show password"
-                  }
                 >
                   {showPassword ? "HIDE" : "SHOW"}
                 </button>
@@ -214,6 +238,67 @@ function Login() {
               </div>
 
             </div>
+
+
+            {/* ================= ROLE ================= */}
+
+            <div className="input-group">
+
+              <label>
+                LOGIN AS
+              </label>
+
+              <div className="role-selector">
+
+                <label className="role-option">
+
+                  <input
+                    type="radio"
+                    name="role"
+                    value="student"
+                    checked={
+                      formData.role === "student"
+                    }
+                    onChange={handleChange}
+                  />
+
+                  <span>
+                    🎓 Student
+                  </span>
+
+                </label>
+
+
+                <label className="role-option">
+
+                  <input
+                    type="radio"
+                    name="role"
+                    value="teacher"
+                    checked={
+                      formData.role === "teacher"
+                    }
+                    onChange={handleChange}
+                  />
+
+                  <span>
+                    👨‍🏫 Teacher
+                  </span>
+
+                </label>
+
+              </div>
+
+            </div>
+
+
+            {/* ERROR */}
+
+            {error && (
+              <div className="form-error">
+                {error}
+              </div>
+            )}
 
 
             {/* FORGOT */}
@@ -254,7 +339,7 @@ function Login() {
           </form>
 
 
-          {/* REGISTER */}
+          {/* ================= REGISTER ================= */}
 
           <div className="register-prompt">
 
@@ -269,7 +354,7 @@ function Login() {
           </div>
 
 
-          {/* SECURITY */}
+          {/* ================= SECURITY ================= */}
 
           <div className="security-note">
 
@@ -278,7 +363,7 @@ function Login() {
             </span>
 
             <span>
-              Secure student workspace
+              Secure academic workspace
             </span>
 
           </div>
@@ -288,7 +373,7 @@ function Login() {
       </main>
 
 
-      {/* ================= RUNNING FOOTER ================= */}
+      {/* ================= FOOTER ================= */}
 
       <footer className="auth-marquee-footer">
 
