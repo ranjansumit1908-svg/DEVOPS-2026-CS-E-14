@@ -5,6 +5,8 @@ import SplashScreen from "./pages/SplashScreen.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import Assignments from "./pages/Assignments.jsx";
+import AssignmentDetails from "./pages/AssignmentDetails.jsx";
 
 function App() {
   return (
@@ -23,7 +25,7 @@ function App() {
           element={<Login />}
         />
 
-        {/* Register / Sign Up */}
+        {/* Register */}
         <Route
           path="/register"
           element={<Register />}
@@ -33,6 +35,18 @@ function App() {
         <Route
           path="/dashboard"
           element={<Dashboard />}
+        />
+
+        {/* Assignments */}
+        <Route
+          path="/assignments"
+          element={<Assignments />}
+        />
+
+        {/* Assignment Details */}
+        <Route
+          path="/assignments/:id"
+          element={<AssignmentDetails />}
         />
 
       </Routes>

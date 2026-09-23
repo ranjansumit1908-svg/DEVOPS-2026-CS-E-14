@@ -40,6 +40,16 @@ test(
 );
 
 test(
+  "Assignments.jsx exists",
+  fs.existsSync("src/pages/Assignments.jsx")
+);
+
+test(
+  "AssignmentDetails.jsx exists",
+  fs.existsSync("src/pages/AssignmentDetails.jsx")
+);
+
+test(
   "App.jsx exists",
   fs.existsSync("src/App.jsx")
 );
@@ -197,6 +207,208 @@ if (fs.existsSync("src/App.jsx")) {
 
 
 /* =====================================================
+   ASSIGNMENTS PAGE TESTS
+   ===================================================== */
+
+let assignmentsCode = "";
+
+if (fs.existsSync("src/pages/Assignments.jsx")) {
+
+  assignmentsCode = fs.readFileSync(
+    "src/pages/Assignments.jsx",
+    "utf8"
+  );
+
+  test(
+    "Assignments component exists",
+    assignmentsCode.includes("function Assignments")
+  );
+
+  test(
+    "Assignments component is exported",
+    assignmentsCode.includes(
+      "export default Assignments"
+    )
+  );
+
+  test(
+    "Assignments uses React Router navigation",
+    assignmentsCode.includes("useNavigate")
+  );
+
+  test(
+    "Assignment data exists",
+    assignmentsCode.includes("const assignments")
+  );
+
+  test(
+    "Assignment title field exists",
+    assignmentsCode.includes("title:")
+  );
+
+  test(
+    "Assignment subject field exists",
+    assignmentsCode.includes("subject:")
+  );
+
+  test(
+    "Assignment teacher field exists",
+    assignmentsCode.includes("teacher:")
+  );
+
+  test(
+    "Assignment description field exists",
+    assignmentsCode.includes("description:")
+  );
+
+  test(
+    "Assignment due date field exists",
+    assignmentsCode.includes("dueDate:")
+  );
+
+  test(
+    "Assignment PDF field exists",
+    assignmentsCode.includes("pdf:")
+  );
+
+  test(
+    "Assignments heading exists",
+    assignmentsCode.includes("Assignments")
+  );
+
+  test(
+    "Academic workspace label exists",
+    assignmentsCode.includes("ACADEMIC WORKSPACE")
+  );
+
+  test(
+    "Assignment list exists",
+    assignmentsCode.includes("assignments.map")
+  );
+
+  test(
+    "Assignment status exists",
+    assignmentsCode.includes("Not Submitted")
+  );
+
+  test(
+    "Assigned by information exists",
+    assignmentsCode.includes("ASSIGNED BY")
+  );
+
+  test(
+    "Due date information exists",
+    assignmentsCode.includes("DUE DATE")
+  );
+
+  test(
+    "View Assignment button exists",
+    assignmentsCode.includes("View Assignment")
+  );
+
+  test(
+    "View PDF button exists",
+    assignmentsCode.includes("View PDF")
+  );
+
+  test(
+    "Assignment details navigation exists",
+    assignmentsCode.includes("/assignments/")
+  );
+
+  test(
+    "Dashboard navigation exists",
+    assignmentsCode.includes(
+      'navigate("/dashboard")'
+    )
+  );
+}
+
+
+/* =====================================================
+   ASSIGNMENT DETAILS TESTS
+   ===================================================== */
+
+let assignmentDetailsCode = "";
+
+if (fs.existsSync("src/pages/AssignmentDetails.jsx")) {
+
+  assignmentDetailsCode = fs.readFileSync(
+    "src/pages/AssignmentDetails.jsx",
+    "utf8"
+  );
+
+  test(
+    "AssignmentDetails component exists",
+    assignmentDetailsCode.includes(
+      "function AssignmentDetails"
+    )
+  );
+
+  test(
+    "AssignmentDetails component is exported",
+    assignmentDetailsCode.includes(
+      "export default AssignmentDetails"
+    )
+  );
+
+  test(
+    "AssignmentDetails uses assignment ID",
+    assignmentDetailsCode.includes("useParams")
+  );
+
+  test(
+    "AssignmentDetails uses navigation",
+    assignmentDetailsCode.includes("useNavigate")
+  );
+
+  test(
+    "AssignmentDetails contains assignment information",
+    assignmentDetailsCode.includes("assignment")
+  );
+}
+
+
+/* =====================================================
+   ASSIGNMENT ROUTING TESTS
+   ===================================================== */
+
+test(
+  "Assignments is imported in App.jsx",
+  appCode.includes(
+    'import Assignments from "./pages/Assignments.jsx"'
+  )
+);
+
+test(
+  "Assignments route exists",
+  appCode.includes('path="/assignments"')
+);
+
+test(
+  "Assignments component is used in route",
+  appCode.includes("<Assignments />")
+);
+
+test(
+  "AssignmentDetails is imported in App.jsx",
+  appCode.includes(
+    'import AssignmentDetails from "./pages/AssignmentDetails.jsx"'
+  )
+);
+
+test(
+  "Assignment details route exists",
+  appCode.includes('path="/assignments/:id"')
+);
+
+test(
+  "AssignmentDetails component is used in route",
+  appCode.includes("<AssignmentDetails />")
+);
+
+
+/* =====================================================
    DASHBOARD CSS TESTS
    ===================================================== */
 
@@ -284,6 +496,51 @@ if (fs.existsSync("src/App.css")) {
     cssCode.includes("#f0643b")
   );
 }
+
+
+/* =====================================================
+   ASSIGNMENTS CSS TESTS
+   ===================================================== */
+
+test(
+  "Assignments page CSS exists",
+  cssCode.includes(".assignments-page")
+);
+
+test(
+  "Assignments header CSS exists",
+  cssCode.includes(".assignments-header")
+);
+
+test(
+  "Assignments heading CSS exists",
+  cssCode.includes(".assignments-heading")
+);
+
+test(
+  "Assignments list CSS exists",
+  cssCode.includes(".assignments-list")
+);
+
+test(
+  "Assignment content CSS exists",
+  cssCode.includes(".assignment-content")
+);
+
+test(
+  "Assignment actions CSS exists",
+  cssCode.includes(".assignment-actions")
+);
+
+test(
+  "PDF button CSS exists",
+  cssCode.includes(".pdf-btn")
+);
+
+test(
+  "Back button CSS exists",
+  cssCode.includes(".back-btn")
+);
 
 
 /* =====================================================
