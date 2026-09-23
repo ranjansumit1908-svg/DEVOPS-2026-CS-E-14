@@ -1598,3 +1598,631 @@ a {
 
   cursor: pointer;
 }
+/* =========================================
+   Assignments Page - Professional UI
+========================================= */
+
+.assignments-page {
+  min-height: 100vh;
+  padding: 55px 8%;
+  background: #f7f5ef;
+}
+
+/* Header */
+
+.assignments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 42px;
+}
+
+.assignments-header h1 {
+  margin: 0;
+  color: #0b1f3a;
+  font-size: 42px;
+  font-weight: 650;
+  letter-spacing: -1px;
+}
+
+.assignments-header p {
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* Dashboard Button */
+
+.back-btn {
+  padding: 12px 22px;
+  border: 1px solid #0b1f3a;
+  border-radius: 9px;
+  background: #0b1f3a;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #142d4f;
+  transform: translateY(-1px);
+}
+
+/* Assignment List */
+
+.assignments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Assignment Card */
+
+.assignment-card {
+  background: #ffffff;
+  border: 1px solid #e6e3dc;
+  border-radius: 18px;
+  padding: 28px 30px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+  transition: all 0.25s ease;
+}
+
+.assignment-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.09);
+  border-color: #d9d5cc;
+}
+
+/* Top section */
+
+.assignment-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.assignment-top h2 {
+  margin: 0;
+  color: #0b1f3a;
+  font-size: 21px;
+  font-weight: 650;
+}
+
+.subject {
+  margin: 7px 0 0;
+  color: #7b8794;
+  font-size: 14px;
+}
+
+/* Status */
+
+.status {
+  padding: 7px 13px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.status.pending {
+  background: #fff2ed;
+  color: #f25c3d;
+  border: 1px solid #ffd9ce;
+}
+
+/* Assignment Information */
+
+.assignment-info {
+  display: flex;
+  gap: 35px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #eeeae3;
+}
+
+.assignment-info p {
+  margin: 0;
+  color: #718096;
+  font-size: 14px;
+}
+
+.assignment-info strong {
+  color: #334155;
+  font-weight: 600;
+}
+
+/* Description */
+
+.description {
+  margin: 18px 0 22px;
+  max-width: 850px;
+  color: #526173;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* Buttons */
+
+.assignment-actions {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+}
+
+.view-btn,
+.pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 17px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* View Assignment */
+
+.view-btn {
+  border: 1px solid #f25c3d;
+  background: #f25c3d;
+  color: #ffffff;
+}
+
+.view-btn:hover {
+  background: #e94f31;
+  border-color: #e94f31;
+  transform: translateY(-1px);
+}
+
+/* PDF */
+
+.pdf-btn {
+  border: 1px solid #d8dce2;
+  background: #ffffff;
+  color: #0b1f3a;
+}
+
+.pdf-btn:hover {
+  border-color: #0b1f3a;
+  background: #f8fafc;
+}
+
+/* =========================================
+   Responsive
+========================================= */
+
+@media (max-width: 900px) {
+  .assignments-page {
+    padding: 40px 5%;
+  }
+
+  .assignment-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .assignments-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .assignments-header h1 {
+    font-size: 34px;
+  }
+
+  .assignment-top {
+    flex-direction: column;
+  }
+
+  .assignment-card {
+    padding: 22px;
+  }
+
+  .assignment-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .view-btn,
+  .pdf-btn {
+    width: 100%;
+  }
+}
+/* =========================================================
+   ASSIGNMENTS PAGE - FINAL CLEAN UI
+   ========================================================= */
+
+.assignments-page {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  box-sizing: border-box;
+  padding: 56px 7%;
+  background: #f7f5ef;
+  overflow: visible;
+}
+
+/* Header */
+
+.assignments-page .assignments-header {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 42px;
+}
+
+.assignments-page .assignments-heading {
+  flex: 1;
+}
+
+.assignments-page .page-label {
+  display: block;
+  margin-bottom: 10px;
+  color: #f15b3a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.assignments-page .assignments-header h1 {
+  margin: 0;
+  color: #0a1f3a;
+  font-size: 48px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+}
+
+.assignments-page .assignments-header p {
+  margin: 12px 0 0;
+  color: #66758a;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Back button */
+
+.assignments-page .back-btn {
+  flex-shrink: 0;
+  padding: 13px 21px;
+  border: 1px solid #0a1f3a;
+  border-radius: 10px;
+  background: #0a1f3a;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.assignments-page .back-btn:hover {
+  background: #132e50;
+  transform: translateY(-1px);
+}
+
+/* List */
+
+.assignments-page .assignments-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Card */
+
+.assignments-page .assignment-card {
+  position: relative;
+  display: block !important;
+  width: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e4e1da;
+  border-radius: 18px;
+  box-shadow: 0 7px 25px rgba(15, 23, 42, 0.055);
+  transition: 0.25s ease;
+}
+
+.assignments-page .assignment-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.09);
+}
+
+/* Orange left line */
+
+.assignments-page .assignment-accent {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 5px;
+  background: #f15b3a;
+}
+
+/* Content */
+
+.assignments-page .assignment-content {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 28px 30px 27px 34px;
+}
+
+/* Top */
+
+.assignments-page .assignment-top {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.assignments-page .assignment-title-section {
+  min-width: 0;
+}
+
+.assignments-page .assignment-number {
+  display: block;
+  margin-bottom: 7px;
+  color: #9aa5b4;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.assignments-page .assignment-title-section h2 {
+  margin: 0;
+  color: #0a1f3a;
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.assignments-page .subject {
+  display: block;
+  margin-top: 7px;
+  color: #718096;
+  font-size: 14px;
+}
+
+/* Status */
+
+.assignments-page .status {
+  flex-shrink: 0;
+  padding: 8px 13px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.assignments-page .status.pending {
+  background: #fff3ef;
+  border: 1px solid #ffd8cd;
+  color: #ed5a3b;
+}
+
+/* Description */
+
+.assignments-page .description {
+  width: 100%;
+  max-width: 850px;
+  margin: 20px 0 23px;
+  color: #526174;
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+/* Meta */
+
+.assignments-page .assignment-meta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  box-sizing: border-box;
+  padding: 16px 0;
+  border-top: 1px solid #eeeae4;
+  border-bottom: 1px solid #eeeae4;
+}
+
+.assignments-page .meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.assignments-page .meta-label {
+  color: #9aa4b1;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.assignments-page .meta-value {
+  color: #344256;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.assignments-page .meta-divider {
+  width: 1px;
+  height: 30px;
+  background: #e2e5e9;
+}
+
+/* Actions */
+
+.assignments-page .assignment-actions {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 21px;
+}
+
+.assignments-page .view-btn,
+.assignments-page .pdf-btn {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 10px 17px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.assignments-page .view-btn {
+  border: 1px solid #f15b3a;
+  background: #f15b3a;
+  color: #ffffff;
+}
+
+.assignments-page .view-btn:hover {
+  background: #e74f30;
+  border-color: #e74f30;
+  box-shadow: 0 6px 16px rgba(241, 91, 58, 0.22);
+}
+
+.assignments-page .view-btn span {
+  font-size: 16px;
+}
+
+.assignments-page .pdf-btn {
+  border: 1px solid #d8dde4;
+  background: #ffffff;
+  color: #0a1f3a;
+}
+
+.assignments-page .pdf-btn:hover {
+  border-color: #0a1f3a;
+  background: #f8fafc;
+}
+
+.assignments-page .pdf-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 23px;
+  border-radius: 5px;
+  background: #fff0ec;
+  color: #ed5a3b;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .assignments-page {
+    padding: 40px 5%;
+  }
+
+  .assignments-page .assignments-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .assignments-page .assignment-top {
+    flex-direction: column;
+  }
+
+  .assignments-page .assignment-meta {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .assignments-page .assignments-header h1 {
+    font-size: 38px;
+  }
+
+  .assignments-page .assignment-content {
+    padding: 24px 20px 24px 25px;
+  }
+
+  .assignments-page .assignment-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .assignments-page .meta-divider {
+    display: none;
+  }
+
+  .assignments-page .assignment-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .assignments-page .view-btn,
+  .assignments-page .pdf-btn {
+    width: 100%;
+  }
+}
+/* =========================================
+   Assignments Page - Scroll Fix
+========================================= */
+
+html:has(.assignments-page),
+body:has(.assignments-page) {
+  height: auto !important;
+  min-height: 100%;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+#root:has(.assignments-page) {
+  height: auto !important;
+  min-height: 100vh;
+  overflow: visible !important;
+}
+
+/* =========================================================
+   GLOBAL PAGE SCROLL FIX
+   ========================================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  height: auto;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#root {
+  min-height: 100vh;
+  overflow: visible;
+}
