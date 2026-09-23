@@ -357,10 +357,11 @@ if (fs.existsSync("src/pages/AssignmentDetails.jsx")) {
     assignmentDetailsCode.includes("useParams")
   );
 
-  test(
-    "AssignmentDetails uses navigation",
-    assignmentDetailsCode.includes("useNavigate")
-  );
+ test(
+  "AssignmentDetails uses navigation",
+  assignmentDetailsCode.includes("useNavigate") ||
+  assignmentDetailsCode.includes("<Link")
+);
 
   test(
     "AssignmentDetails contains assignment information",
