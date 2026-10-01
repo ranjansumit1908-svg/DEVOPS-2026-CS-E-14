@@ -2226,3 +2226,295 @@ body {
   min-height: 100vh;
   overflow: visible;
 }
+
+
+/* =========================================================
+   APP STATES, FORMS AND DETAIL PAGE
+   ========================================================= */
+
+.state-message {
+  padding: 28px 0;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.state-message a {
+  color: var(--orange);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.form-success {
+  margin-bottom: 15px;
+  padding: 11px 13px;
+  border-left: 3px solid var(--green);
+  background: var(--green-bg);
+  color: var(--green);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.logout-btn {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  color: var(--orange);
+}
+
+.assignment-status.graded {
+  background: var(--green-bg);
+  color: var(--green);
+}
+
+.status.submitted {
+  background: var(--green-bg);
+  color: var(--green);
+}
+
+.danger-btn {
+  padding: 10px 18px;
+  border: 1px solid #c64f31;
+  background: transparent;
+  color: #c64f31;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.danger-btn:hover {
+  background: #c64f31;
+  color: #fff;
+}
+
+/* ----- shared form fields ----- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.field label {
+  color: var(--muted-light);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  background: var(--paper);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+/* ----- create assignment form ----- */
+
+.create-form {
+  max-width: 1000px;
+  margin: 0 auto 32px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  background: var(--paper);
+}
+
+.create-form h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.create-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 20px;
+}
+
+.create-grid .field-wide {
+  grid-column: 1 / -1;
+}
+
+/* ----- assignment details page ----- */
+
+.details-page {
+  min-height: 100vh;
+  padding: 40px;
+  background: var(--cream);
+  color: var(--navy);
+}
+
+.details-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.details-back {
+  color: var(--orange);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.details-card {
+  margin-top: 24px;
+  padding: 32px;
+  border: 1px solid var(--border);
+  background: var(--paper);
+}
+
+.details-card h1 {
+  margin: 10px 0 8px;
+  font-size: 34px;
+}
+
+.details-label {
+  color: var(--muted-light);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  margin-bottom: 16px;
+}
+
+.details-text {
+  margin: 18px 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.details-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+}
+
+.details-meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.grade-result {
+  margin-bottom: 16px;
+  padding: 16px;
+  border-left: 3px solid var(--green);
+  background: var(--green-bg);
+}
+
+.grade-result strong {
+  font-size: 22px;
+}
+
+.grade-result p {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.submission-item {
+  padding: 18px 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.submission-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.submission-head span:not(.status) {
+  color: var(--muted-light);
+  font-size: 13px;
+}
+
+.submission-body {
+  margin: 12px 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.submission-body a {
+  color: var(--orange);
+}
+
+.grade-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.grade-form .field {
+  margin-bottom: 0;
+}
+
+.grade-form .field input[type="number"] {
+  width: 110px;
+}
+
+.grade-form .grade-feedback {
+  flex: 1;
+  min-width: 200px;
+}
+
+.grade-form .form-error {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+@media (max-width: 700px) {
+  .create-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .details-page {
+    padding: 20px 16px;
+  }
+
+  .create-form,
+  .details-card {
+    padding: 20px;
+  }
+}
+
+.details-meta .meta-label,
+.submission-body .meta-label {
+  color: var(--muted-light);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
