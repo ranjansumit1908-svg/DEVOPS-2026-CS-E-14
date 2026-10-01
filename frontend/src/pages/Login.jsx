@@ -1,8 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import api, { getErrorMessage, saveSession } from "../api.js";
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -12,6 +14,7 @@ function Login() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,37 +27,28 @@ function Login() {
     setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const users =
-      JSON.parse(localStorage.getItem("users")) || [];
+    setLoading(true);
+    setError("");
 
-    const user = users.find(
-      (item) =>
-        item.username === formData.username &&
-        item.password === formData.password &&
-        item.role === formData.role
-    );
+    try {
+      const { data } = await api.post("/auth/login", {
+        username: formData.username,
+        password: formData.password,
+        role: formData.role,
+      });
 
-    if (!user) {
-      setError(
-        "Invalid username, password, or selected role."
-      );
-      return;
+      // Session: JWT + currentUser + role in localStorage
+      saveSession(data.token, data.user);
+
+      navigate("/dashboard");
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setLoading(false);
     }
-
-    localStorage.setItem(
-      "currentUser",
-      JSON.stringify(user)
-    );
-
-    localStorage.setItem(
-      "userRole",
-      user.role
-    );
-
-    navigate("/dashboard");
   };
 
   return (
@@ -292,6 +286,12 @@ function Login() {
             </div>
 
 
+            {location.state?.registered && !error && (
+              <div className="form-success">
+                Account created. Please sign in.
+              </div>
+            )}
+
             {/* ERROR */}
 
             {error && (
@@ -324,10 +324,11 @@ function Login() {
             <button
               type="submit"
               className="auth-submit"
+              disabled={loading}
             >
 
               <span>
-                SIGN IN
+                {loading ? "SIGNING IN..." : "SIGN IN"}
               </span>
 
               <span className="submit-arrow">

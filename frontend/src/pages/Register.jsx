@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import api, { getErrorMessage } from "../api.js";
 
 function Register() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +29,7 @@ function Register() {
     setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -40,37 +42,25 @@ function Register() {
       return;
     }
 
-    const users =
-      JSON.parse(localStorage.getItem("users")) || [];
+    setLoading(true);
+    setError("");
 
-    const usernameExists = users.some(
-      (user) => user.username === formData.username
-    );
+    try {
+      // Accounts (users) are stored in MongoDB through the backend,
+      // not in localStorage. Only the login session uses localStorage.
+      await api.post("/auth/register", {
+        name: formData.name,
+        username: formData.username,
+        password: formData.password,
+        role: formData.role,
+      });
 
-    if (usernameExists) {
-      setError(
-        "Username already exists. Please choose another username."
-      );
-      return;
+      navigate("/login", { state: { registered: true } });
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setLoading(false);
     }
-
-    const newUser = {
-      name: formData.name,
-      username: formData.username,
-      password: formData.password,
-      role: formData.role,
-    };
-
-    users.push(newUser);
-
-    localStorage.setItem(
-      "users",
-      JSON.stringify(users)
-    );
-
-    alert("Account created successfully!");
-
-    navigate("/login");
   };
 
   return (
@@ -373,10 +363,11 @@ function Register() {
             <button
               type="submit"
               className="auth-submit"
+              disabled={loading}
             >
 
               <span>
-                CREATE ACCOUNT
+                {loading ? "CREATING ACCOUNT..." : "CREATE ACCOUNT"}
               </span>
 
               <span className="submit-arrow">

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 
 import SplashScreen from "./pages/SplashScreen.jsx";
@@ -7,6 +7,15 @@ import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Assignments from "./pages/Assignments.jsx";
 import AssignmentDetails from "./pages/AssignmentDetails.jsx";
+
+// Only logged-in users (valid token in localStorage) can open these pages
+function ProtectedRoute({ children }) {
+  if (!localStorage.getItem("token")) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
 
 function App() {
   return (
@@ -34,19 +43,25 @@ function App() {
         {/* Dashboard */}
         <Route
           path="/dashboard"
-          element={<Dashboard />}
+          element={<ProtectedRoute><Dashboard /></ProtectedRoute>}
         />
 
         {/* Assignments */}
         <Route
           path="/assignments"
-          element={<Assignments />}
+          element={<ProtectedRoute><Assignments /></ProtectedRoute>}
         />
 
         {/* Assignment Details */}
         <Route
           path="/assignments/:id"
-          element={<AssignmentDetails />}
+          element={<ProtectedRoute><AssignmentDetails /></ProtectedRoute>}
+        />
+
+        {/* Unknown URL */}
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
         />
 
       </Routes>
